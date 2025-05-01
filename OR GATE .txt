@@ -1,0 +1,103 @@
+OR Gate Dataflow Model	
+VHD Code:
+entity OR_DF is
+ Port ( a : in STD_LOGIC;
+ b : in STD_LOGIC;
+ c : out STD_LOGIC);
+end OR_DF;
+architecture Dataflow of OR_DF is
+begin
+c <= a OR b;
+end Dataflow;
+RTL Diagram	
+TBW Code:	
+entity OR_DF_TBW is
+-- Port ( );
+end OR_DF_TBW;
+architecture Dataflow of OR_DF_TBW is
+component OR_DF is
+ Port ( a : in STD_LOGIC;
+ b : in STD_LOGIC;
+ c : out STD_LOGIC);
+end component;
+Signal a1:STD_LOGIC:='0';
+Signal b1:STD_LOGIC:='0';
+Signal c1:STD_LOGIC;
+begin
+UUT: OR_DF Port map(a=>a1, b=>b1, c=>c1);
+stim_proc: process
+begin
+wait for 100ns;
+a1<='0';
+b1<='0';
+wait for 100ns;
+a1<='0';
+b1<='1';
+wait for 100ns;
+a1<='1';
+b1<='0';
+wait for 100ns;
+a1<='1'; 
+b1<='1';
+wait;
+end process;
+end Dataflow;
+#TBW Waveform
+
+
+
+OR Gate Behavioral Model	
+VHD Code:
+entity OR_GATE_BV is
+ Port ( A : in STD_LOGIC;
+ B : in STD_LOGIC;
+ C : out STD_LOGIC);
+end OR_GATE_BV;
+architecture Behavioral of OR_GATE_BV is
+begin
+process(A,B)
+begin
+ if(A='0' and B='0') then
+ c<='0';
+ else
+ c<='1';
+ end if;
+end process;
+end Behavioral;
+RTL Diagram	
+TBW Code:	
+entity OR_GATE_TBW is
+-- Port ( );
+end OR_GATE_TBW;
+architecture Behavioral of OR_GATE_TBW is
+component OR_GATE_BV is
+ Port ( a : in STD_LOGIC;
+ b : in STD_LOGIC;
+ c : out STD_LOGIC);
+end component;
+Signal a1:STD_LOGIC:='0';
+Signal b1:STD_LOGIC:='0';
+Signal c1:STD_LOGIC;
+begin
+UUT: OR_GATE_BV Port map(a=>a1, b=>b1, c=>c1);
+stim_proc: process
+begin
+wait for 100ns;
+a1<='0';
+b1<='0';
+wait for 100ns;
+a1<='0';
+b1<='1';
+wait for 100ns;
+a1<='1';
+b1<='0'; 
+wait for 100ns;
+a1<='1';
+b1<='1';
+wait;
+end process;
+end Behavioral;
+
+
+#TBW Waveform	
+
