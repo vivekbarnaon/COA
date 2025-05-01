@@ -1,0 +1,109 @@
+#AND Gate Dataflow Model
+VHD Code:
+entity AND_DF is
+ Port ( A : in STD_LOGIC;
+ B : in STD_LOGIC;
+ C : out STD_LOGIC);
+end AND_DF;
+architecture Dataflow of AND_DF is
+begin
+C <= A AND B;
+end Dataflow;
+
+#RTL Diagram -> 
+
+TBW Code:	
+entity AND_DF_TBW is
+-- Port ( );
+end AND_DF_TBW;
+architecture Dataflow of AND_DF_TBW is
+component AND_DF is
+ Port ( A : in STD_LOGIC;
+ B : in STD_LOGIC;
+ C : out STD_LOGIC);
+end component;
+Signal a1:STD_LOGIC:='0';
+Signal b1:STD_LOGIC:='0';
+Signal c1:STD_LOGIC;
+begin
+UUT: AND_DF Port map(A=>a1, B=>b1, c=>c1);
+stim_proc: process
+begin
+wait for 100ns;
+a1<='0';
+b1<='0';
+wait for 100ns;
+a1<='0';
+b1<='1';
+wait for 100ns;
+a1<='1';
+b1<='0';
+wait for 100ns;
+a1<='1';
+b1<='1';
+wait;
+end process;
+end Dataflow;
+
+#TBW Waveform ->
+
+
+
+#AND Gate Behavioral Model 
+VHD Code:
+entity AND_GATE_BV is
+ Port ( A : in STD_LOGIC;
+ B : in STD_LOGIC;
+ C : out STD_LOGIC);
+end AND_GATE_BV;
+architecture Behavioral of AND_GATE_BV is
+begin
+process(A,B)
+begin
+ if(A='1' and B='1') then
+ c<='1';
+ else
+ c<='0';
+ end if;
+end process;
+end Behavioral;
+
+#RTL Diagram -> 
+
+TBW Code:	
+entity AND_GATE_TBW is
+-- Port ( );
+end AND_GATE_TBW;
+architecture Behavioral of AND_GATE_TBW is
+component AND_GATE_BV is
+ Port ( A : in STD_LOGIC;
+ B : in STD_LOGIC;
+ C : out STD_LOGIC);
+end component;
+Signal a1:STD_LOGIC:='0';
+Signal b1:STD_LOGIC:='0';
+Signal c1:STD_LOGIC;
+begin
+UUT: AND_GATE_BV Port map(A=>a1, B=>b1, C=>c1);
+stim_proc: process
+begin
+wait for 100ns;
+a1<='0';
+b1<='0';
+wait for 100ns;
+a1<='0';
+b1<='1';
+wait for 100ns;
+a1<='1';
+b1<='0';
+wait for 100ns;
+a1<='1';
+b1<='1';
+wait;
+end process;
+end Behavioral;
+
+
+#TBW Waveform ->
+
+
