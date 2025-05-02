@@ -1,0 +1,106 @@
+#NOR Gate Dataflow Model
+VHD Code:
+entity NOR_DF is
+Port ( a : in STD_LOGIC;
+b : in STD_LOGIC;
+c : out STD_LOGIC);
+end NOR_DF;
+architecture Dataflow of NOR_DF is
+begin
+c<=a NOR b;
+end Dataflow;
+
+RTL Diagram
+
+TBW Code:
+entity NOR_DF_TBW is
+-- Port ( );
+end NOR_DF_TBW;
+architecture Dataflow of NOR_DF_TBW is
+component NOR_DF is
+Port ( a : in STD_LOGIC;
+b : in STD_LOGIC;
+c : out STD_LOGIC);
+end component;
+Signal a1:STD_LOGIC:='0';
+Signal b1:STD_LOGIC:='0';
+Signal c1:STD_LOGIC;
+begin
+UUT: NOR_DF Port map(a=>a1, b=>b1, c=>c1);
+stim_proc: process
+begin
+wait for 100ns;
+a1<='0';
+b1<='0';
+wait for 100ns;
+a1<='0';
+b1<='1';
+wait for 100ns;
+a1<='1';
+b1<='0';
+wait for 100ns;
+a1<='1';
+b1<='1';
+wait;
+end process;
+end Dataflow;
+
+TBW Waveform
+
+#NOR Gate Behavioral Model
+
+VHD Code:
+entity NOR_GATE_BV is
+Port ( A : in
+STD_LOGIC;
+B : in STD_LOGIC;
+C : out STD_LOGIC);
+end NOR_GATE_BV;
+architecture Behavioral of NOR_GATE_BV is
+begin
+process(A,B)
+begin
+if(A='0' and B='0') then
+C<='1';
+else
+C<='0';
+end if;
+end process;
+end Behavioral;
+
+RTL Diagram
+
+TBW Code:
+entity NOR_GATE_TBW is
+-- Port ( );
+end NOR_GATE_TBW;
+architecture Behavioral of NOR_GATE_TBW is
+component NOR_GATE_BV is
+Port ( A : in STD_LOGIC;
+B : in STD_LOGIC;
+C : out STD_LOGIC);
+end component;
+Signal a1:STD_LOGIC:='0';
+Signal b1:STD_LOGIC:='0';
+Signal c1:STD_LOGIC;
+begin
+UUT: NOR_GATE_BV Port map(A=>a1, B=>b1, C=>c1);
+stim_proc: process
+begin
+wait for 100ns;
+a1<='0';
+b1<='0';
+wait for 100ns;
+a1<='0';
+b1<='1';
+wait for 100ns;
+a1<='1';
+b1<='0';
+wait for 100ns;
+a1<='1';
+b1<='1';
+wait;
+end process;
+end Behavioral;
+
+TBW Waveform

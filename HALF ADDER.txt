@@ -1,0 +1,167 @@
+#HALF ADDER Dataflow Model
+VHD Code:
+entity HALF_ADDER_DF is
+Port ( A : in STD_LOGIC;
+B : in STD_LOGIC;
+S : out STD_LOGIC;
+C : out STD_LOGIC);
+end HALF_ADDER_DF;
+architecture Dataflow of HALF_ADDER_DF is
+begin
+S<=A xor B;
+C<=A and B;
+end Dataflow
+
+RTL Diagram
+TBW Code:
+entity HALF_ADDER_TBW is
+-- Port ( );
+end HALF_ADDER_TBW;
+architecture Behavioral of HALF_ADDER_TBW is
+component HALF_ADDER_BV is
+Port ( A : in
+STD_LOGIC; B: in
+STD_LOGIC; S: out
+STD_LOGIC;
+C : out STD_LOGIC);
+end component;
+Signal a1:STD_LOGIC:='0';
+Signal b1:STD_LOGIC:='0';
+Signal s1:STD_LOGIC;
+Signal c1:STD_LOGIC;
+begin
+UUT: HALF_ADDER_BV Port map(A=>a1, B=>b1, S=>s1, C=>c1);
+stim_proc: process
+begin
+wait for 100ns;
+a1<='0';
+b1<='0';
+wait for 100ns;
+a1<='0';
+b1<='1';
+wait for 100ns;
+a1<='1';
+b1<='0';
+wait for 100ns;
+a1<='1';
+b1<='1';
+wait;
+end process;
+end Behavioral;
+
+TBW Waveform
+
+#HALF ADDER Behavioral Model
+VHD Code:
+entity HALF_ADDER_BV is
+Port ( A : in STD_LOGIC;
+B : in STD_LOGIC;
+S : out STD_LOGIC;
+C : out STD_LOGIC);
+end HALF_ADDER_BV;
+architecture Behavioral of HALF_ADDER_BV is
+begin
+process(A,B)
+begin
+if(A=B) then
+S<='0';
+else
+S<='1';
+end if;
+if(A='1' and B='1') then
+C<='1';
+else
+C<='0';
+end if;
+end process; end Behavioral;
+
+RTL Diagram:
+
+TBW Code:
+entity HALF_ADDER_TBW is
+-- Port ( );
+end HALF_ADDER_TBW;
+architecture Behavioral of HALF_ADDER_TBW is
+component HALF_ADDER_BV is
+Port ( A : in STD_LOGIC;
+B: in STD_LOGIC;
+S: out STD_LOGIC;
+C : out STD_LOGIC);
+end component;
+Signal a1:STD_LOGIC:='0';
+Signal
+b1:STD_LOGIC:='0';
+Signal s1:STD_LOGIC;
+Signal c1:STD_LOGIC;
+begin
+UUT: HALF_ADDER_BV Port map(A=>a1, B=>b1, S=>s1, C=>c1);
+stim_proc: process
+begin
+wait for 100ns;
+a1<='0';
+b1<='0';
+wait for 100ns;
+a1<='0';
+b1<='1';
+wait for 100ns;
+a1<='1';
+b1<='0';
+wait for 100ns;
+a1<='1';
+b1<='1';
+wait;
+end process;
+end Behavioral;
+
+TBW Waveform:
+
+
+#HALF ADDER Structural Model
+VHD Code:
+Entity HALF_ADDER_structural is
+Port ( x : in STD_LOGIC;
+y : in STD_LOGIC;
+sum : out STD_LOGIC;
+carry : out STD_LOGIC);
+end HALF_ADDER_structural;
+architecture Structural of HALF_ADDER_structural is
+component XOR_DF is
+Port ( A : in STD_LOGIC;
+B : in STD_LOGIC;
+C : out STD_LOGIC);
+end component;
+component AND_DF is
+Port ( A : in STD_LOGIC;
+B : in STD_LOGIC;
+C : out STD_LOGIC);
+end component;
+begin
+l1:XOR_DF port map(x,y,sum);
+l2:AND_DF port map(x,y,carry);
+end Structural;
+
+RTL Diagram
+TBW Code:
+entity HALF_ADDER_structural is
+Port ( x : in STD_LOGIC;
+y : in STD_LOGIC;
+sum : out STD_LOGIC;
+carry : out STD_LOGIC);
+end HALF_ADDER_structural;
+architecture Structural of HALF_ADDER_structural is
+component XOR_DF is
+Port ( A : in STD_LOGIC;
+B : in STD_LOGIC;
+C : out STD_LOGIC);
+end component;
+component AND_DF is
+Port ( A : in STD_LOGIC;
+B : in STD_LOGIC;
+C : out STD_LOGIC);
+end component;
+begin
+l1:XOR_DF port map(x,y,sum);
+l2:AND_DF port map(x,y,carry);
+end Structural;
+
+TBW Waveform

@@ -1,0 +1,106 @@
+#XOR Gate Dataflow Model
+VHD Code:
+entity XOR_DF is
+Port ( a : in STD_LOGIC;
+b : in STD_LOGIC;
+c : out STD_LOGIC);
+end XOR_DF;
+architecture Dataflow of XOR_DF is
+begin
+c<=a XOR b;
+end Dataflow;
+
+RTL Diagram
+
+TBW Code:
+entity XOR_DF_TBW is
+-- Port ( );
+end XOR_DF_TBW;
+architecture Dataflow of XOR_DF_TBW is
+component XOR_DF is
+Port ( a : in STD_LOGIC;
+b : in STD_LOGIC;
+c : out STD_LOGIC);
+end component;
+Signal a1:STD_LOGIC:='0';
+Signal b1:STD_LOGIC:='0';
+Signal c1:STD_LOGIC;
+begin
+UUT: XOR_DF Port map(a=>a1, b=>b1, c=>c1);
+stim_proc: process
+begin
+wait for 100ns;
+a1<='0';
+b1<='0';
+wait for 100ns;
+a1<='0';
+b1<='1';
+wait for 100ns;
+a1<='1';
+b1<='0';
+wait for 100ns;
+a1<='1';
+b1<='1';
+wait;
+end process;
+end Dataflow;
+
+TBW Waveform
+
+
+#XOR Gate Behavioral Model
+VHD Code:
+entity XOR_GATE_BV is
+Port ( A : in
+STD_LOGIC;
+B : in STD_LOGIC;
+C : out STD_LOGIC);
+end XOR_GATE_BV;
+architecture Behavioral of XOR_GATE_BV is
+begin
+process(A,B)
+begin
+if(A=B) then
+C<='0';
+else
+C<='1';
+end if;
+end process;
+end Behavioral;
+
+RTL Diagram
+
+TBW Code:
+entity XOR_GATE_TBW is
+-- Port ( );
+end XOR_GATE_TBW;
+architecture Behavioral of XOR_GATE_TBW is
+component XOR_GATE_BV is
+Port ( A : in STD_LOGIC;
+B: in STD_LOGIC;
+C : out STD_LOGIC);
+end component;
+Signal a1:STD_LOGIC:='0';
+Signal b1:STD_LOGIC:='0';
+Signal c1:STD_LOGIC;
+begin
+UUT: XOR_GATE_BV Port map(A=>a1, B=>b1, C=>c1);
+stim_proc: process
+begin
+wait for 100ns;
+a1<='0';
+b1<='0';
+wait for 100ns;
+a1<='0';
+b1<='1';
+wait for 100ns;
+a1<='1';
+b1<='0';
+wait for 100ns;
+a1<='1';
+b1<='1';
+wait;
+end process;
+end Behavioral;
+
+TBW Waveform
