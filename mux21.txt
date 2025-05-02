@@ -1,0 +1,131 @@
+#2:1 MUX Dataflow Model
+VHD Code:
+entity MUX_2_1_DF is
+Port ( I0 : in STD_LOGIC;
+I1 : in STD_LOGIC;
+S : in STD_LOGIC;
+Y : out STD_LOGIC);
+end MUX_2_1_DF;
+architecture Dataflow of MUX_2_1_DF is
+begin
+Y<=((NOT S) AND I0) OR (S AND I1);
+end Dataflow;
+
+RTL Diagram
+
+TBW Code:
+entity MUX_2_1_TBW is
+-- Port ( );
+end MUX_2_1_TBW;
+architecture Dataflow of MUX_2_1_TBW is
+component MUX_2_1_BV is
+Port ( I0 : in STD_LOGIC;
+I1 : in STD_LOGIC;
+S : in STD_LOGIC;
+Y : out STD_LOGIC);
+end component;
+signal i01: STD_LOGIC:='0';
+signal i11: STD_LOGIC:='0';
+signal s1: STD_LOGIC:='0';
+signal y1: STD_LOGIC;
+begin
+UUT: MUX_2_1_DF Port map(I0=>i01, I1=>i11, S=>s1, Y=>y1);
+stim_proc: process
+begin
+wait for 100ns;
+s1<='0';
+wait for 100ns;
+s1<='1';
+wait;
+end process;
+end Dataflow;
+
+TBW Waveform
+
+
+#2:1 MUX Behavioral Model
+VHD Code:
+entity MUX_2_1_DF is
+Port ( I0 : in STD_LOGIC;
+I1 : in STD_LOGIC;
+S : in STD_LOGIC;
+Y : out STD_LOGIC);
+end MUX_2_1_DF;
+architecture Behavioral of MUX_2_1_DF is
+begin
+process(I0,I1,S)
+begin
+if(S='0') then
+Y <= I0;
+else
+Y<= I1;
+end if;
+end process;
+end Behavioral;
+
+RTL Diagram
+TBW Code:
+entity MUX_2_1_TBW is
+-- Port ( );
+end MUX_2_1_TBW;
+architecture Behavioral of MUX_2_1_TBW is
+component MUX_2_1_DF is
+Port ( I0 : in STD_LOGIC;
+I1: in STD_LOGIC;
+S: in STD_LOGIC;
+Y : out STD_LOGIC);
+end component;
+Signal i01:STD_LOGIC:='0';
+Signal i11:STD_LOGIC:='0';
+Signal s1:STD_LOGIC:='0';
+Signal y1:STD_LOGIC;
+begin
+UUT: MUX_2_1_DF Port map(I0=>i01, I1=>i11, S=>s1, Y=>y1);
+stim_proc: process
+begin
+wait for 100ns;
+s1<='1';
+wait;
+end process;
+end Behavioral;
+TBW Waveform
+
+#2:1 MUX Dataflow Model
+VHD Code:
+entity MUX_2_1_dataflow is
+Port ( I0 : in STD_LOGIC;
+I1 : in STD_LOGIC;
+S : in STD_LOGIC;
+Y : out STD_LOGIC);
+end MUX_2_1_dataflow;
+architecture Dataflow of MUX_2_1_dataflow is
+begin
+Y <= (((not S) and I0) or (S and I1));
+end Dataflow;
+RTL Diagram
+TBW Code:
+entity MUX_2_1_TBW is
+-- Port ( );
+end MUX_2_1_TBW;
+architecture Behavioral of MUX_2_1_TBW is
+component MUX_2_1_DF is
+Port ( I0 : in STD_LOGIC;
+I1: in STD_LOGIC;
+S: in STD_LOGIC;
+Y : out STD_LOGIC);
+end component;
+Signal i01:STD_LOGIC:='0';
+Signal i11:STD_LOGIC:='0';
+Signal s1:STD_LOGIC:='0';
+Signal y1:STD_LOGIC;
+begin
+UUT: MUX_2_1_DF Port map(I0=>i01, I1=>i11, S=>s1, Y=>y1);
+stim_proc: process
+begin
+wait for 100ns;
+s1<='1';
+wait;
+end process;
+end Behavioral;
+
+TBW Waveform
