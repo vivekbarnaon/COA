@@ -1,0 +1,51 @@
+AND_NAND Gate Dataflow Model
+VHD Code:
+entity AND_NAND_DF is
+Port ( A : in
+STD_LOGIC;
+B : in STD_LOGIC;
+C : out STD_LOGIC);
+end AND_NAND_DF;
+architecture Dataflow of AND_NAND_DF is
+begin
+C<=(A NAND B) NAND (A NAND B);
+end Dataflow;
+
+RTL Diagram
+
+TBW Code:
+entity AND_NAND_TBW is
+-- Port ( );
+end AND_NAND_TBW;
+architecture Dataflow of AND_NAND_TBW is
+component NAND_DF is
+Port ( A : in STD_LOGIC;
+B : in STD_LOGIC;
+C : out STD_LOGIC);
+end component;
+Signal a1:STD_LOGIC:='0';
+Signal b1:STD_LOGIC:='0';
+Signal c1:STD_LOGIC;
+begin
+UUT: AND_NAND_DF Port map(A=>a1, B=>b1, C=>c1);
+stim_proc: process
+begin
+wait for 100ns;
+a1<='0';
+b1<='0';
+wait for 100ns;
+a1<='0';
+b1<='1';
+wait for 100ns;
+a1<='1';
+b1<='0';
+wait for 100ns;
+a1<='1';
+b1<='1';
+wait;
+end process;
+end Dataflow;
+
+TBW Waveform
+
+
