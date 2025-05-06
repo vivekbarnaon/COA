@@ -1,0 +1,53 @@
+%List Operations Using Accumulators
+sum_acc(List, Sum) :- sum_helper(List, 0, Sum).
+
+sum_helper([], Acc, Acc).
+sum_helper([H|T], Acc, Sum) :-
+    NewAcc is Acc + H,
+    sum_helper(T, NewAcc, Sum).
+
+% Reverse List Using Accumulator
+
+reverse_acc(List, Reversed) :- reverse_helper(List, [], Reversed).
+
+reverse_helper([], Acc, Acc).
+reverse_helper([H|T], Acc, Reversed) :-
+    reverse_helper(T, [H|Acc], Reversed).
+
+%Logic Gates Definitions in Prolog
+% AND Gate
+and_gate(0, 0, 0).
+and_gate(0, 1, 0).
+and_gate(1, 0, 0).
+and_gate(1, 1, 1).
+
+% OR Gate
+or_gate(0, 0, 0).
+or_gate(0, 1, 1).
+or_gate(1, 0, 1).
+or_gate(1, 1, 1).
+
+% NOT Gate
+not_gate(0, 1).
+not_gate(1, 0).
+
+% NAND Gate
+nand_gate(A, B, R) :-
+    and_gate(A, B, X),
+    not_gate(X, R).
+
+% NOR Gate
+nor_gate(A, B, R) :-
+    or_gate(A, B, X),
+    not_gate(X, R).
+
+% XOR Gate
+xor_gate(0, 0, 0).
+xor_gate(1, 1, 0).
+xor_gate(0, 1, 1).
+xor_gate(1, 0, 1).
+
+% XNOR Gate
+xnor_gate(A, B, R) :-
+    xor_gate(A, B, X),
+    not_gate(X, R).
